@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { blogConfig } from '../data';
-import { Sun, Moon, Monitor, FolderOpen, Star } from 'lucide-react';
+import { Sun, Moon, Monitor, FolderOpen, Star, Search } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
 const Header = () => {
@@ -38,6 +38,16 @@ const Header = () => {
                 {blogConfig.name}
             </div>
             <div className="w-px h-5 bg-white/20"></div>
+
+            {/* Mobile Search Button */}
+            <Link
+                to="/search"
+                className="lg:hidden flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Search"
+            >
+                <Search className="w-4 h-4" />
+            </Link>
+
             <Link
                 to="/categories"
                 className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
