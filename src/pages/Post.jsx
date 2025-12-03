@@ -6,24 +6,33 @@ import ReactMarkdown from 'react-markdown';
 import { getPostBySlug } from '../postLoader';
 import { useFavorites } from '../FavoritesContext';
 import Layout from '../components/Layout';
+import Comments from '../components/Comments';
 
 const Post = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const { isFavorite, toggleFavorite } = useFavorites();
     const [post, setPost] = useState(null);
-    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getPostBySlug(slug)
-            .then(data => setPost(data))
-            .catch(err => setError(err.toString()));
+            .then(data => {
+                setPost(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
     }, [slug]);
 
-    if (error) {
+    if (loading) {
         return (
             <Layout>
-                <div className="text-red-500 p-12">Error: {error}</div>
+                <div className="flex items-center justify-center min-h-[50vh]">
+                    <div className="animate-pulse text-xl font-light tracking-widest text-gray-400">LOADING...</div>
+                </div>
             </Layout>
         );
     }
@@ -31,12 +40,20 @@ const Post = () => {
     if (!post) {
         return (
             <Layout>
-                <div className="p-12">Loading...</div>
+                <div className="text-center py-20">
+                    <h2 className="text-2xl font-bold mb-4">Post not found</h2>
+                    <button
+                        onClick={() => navigate('/')}
+                        className="text-tempo-accent hover:underline"
+                    >
+                        Return Home
+                    </button>
+                </div>
             </Layout>
         );
     }
 
-    const isFavorited = isFavorite(slug);
+    const isFavorited = isFavorite(post.id);
 
     return (
         <Layout>
@@ -57,14 +74,14 @@ const Post = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                onClick={() => toggleFavorite(slug)}
+                onClick={() => toggleFavorite(post)}
                 className="fixed top-36 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all"
                 aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
             >
                 <Star
-                    className={`w-5 h-5 transition-all ${isFavorited
-                            ? 'fill-yellow-400 text-yellow-400'
-                            : 'text-gray-400'
+                    className={`w-5 h-5 transition-colors ${isFavorited
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-gray-400'
                         }`}
                 />
             </motion.button>
@@ -88,9 +105,12 @@ const Post = () => {
                 </h1>
 
                 {/* Content */}
-                <div className="prose prose-lg max-w-none">
+                <div className="prose prose-lg max-w-none mb-16">
                     <ReactMarkdown>{post.content}</ReactMarkdown>
                 </div>
+
+                {/* Comments Section */}
+                <Comments postSlug={slug} />
             </motion.article>
         </Layout>
     );
