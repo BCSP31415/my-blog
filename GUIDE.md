@@ -177,6 +177,34 @@ excerpt: "这是一段简短的文章摘要，会显示在首页列表卡片上�
 这里开始写正文...
 ```
 
+### 3. 💬 配置评论系统 (Giscus)
+您的博客现在集成了 **Giscus**，这是一个基于 GitHub Discussions 的评论系统。为了让它正常工作，您需要进行以下配置：
+
+1.  **准备 GitHub 仓库**：
+    -   确保您的博客仓库是 **Public** (公开) 的。
+    -   在仓库设置中启用 **Discussions** 功能。
+
+2.  **获取配置信息**：
+    -   访问 [Giscus 官网](https://giscus.app/zh-CN)。
+    -   输入您的仓库地址 (例如 `username/blog`)。
+    -   在 "Discussion 分类" 中选择 "Announcements" (或您创建的其他分类)。
+    -   页面下方会自动生成一段代码。
+
+3.  **更新代码**：
+    -   打开 `src/components/Comments.jsx` 文件。
+    -   找到 `<Giscus ... />` 组件。
+    -   将官网生成的 `repo`, `repoId`, `categoryId` 替换进去。
+
+```javascript
+<Giscus
+    repo="your-username/your-repo"
+    repoId="R_kgD..."
+    category="Announcements"
+    categoryId="DIC_kwD..."
+    // ... 其他保持不变
+/>
+```
+
 > **注意**：`category` 字段非常重要，系统会自动识别它并生成分类页面。
 
 #### Markdown 写作技巧：
