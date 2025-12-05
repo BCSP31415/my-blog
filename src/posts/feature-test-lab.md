@@ -9,7 +9,7 @@ excerpt: "本文用于验证博客系统的富文本渲染能力。包含远程�
 
 这里展示一张来自 Unsplash 的随机图片，用于测试网络图片加载与自适应宽度：
 
-![示例图片：安静的极简主义工作台](https://images.unsplash.com/photo-1499750310159-52f0f298fca8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80)
+![示例图片：安静的极简主义工作台](https://picsum.photos/1000/600)
 
 *图注：如果图片无法显示，请检查网络连接或 Image 组件的配置。*
 

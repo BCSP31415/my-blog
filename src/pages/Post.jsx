@@ -3,6 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Star } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css'; // Import KaTeX CSS
 import { getPostBySlug } from '../postLoader';
 import { useFavorites } from '../FavoritesContext';
 import Layout from '../components/Layout';
@@ -106,7 +110,46 @@ const Post = () => {
 
                 {/* Content */}
                 <div className="prose prose-lg max-w-none mb-16">
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm, remarkMath]}
+                        rehypePlugins={[rehypeKatex]}
+                        components={{
+                            img: ({ node, ...props }) => (
+                                <div className="my-8">
+                                    <img
+                                        {...props}
+                                        className="rounded-xl shadow-lg border border-white/10 w-full h-auto object-cover"
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer"
+                                    />
+                                    {props.alt && (
+                                        <p className="text-center text-sm text-gray-500 mt-2 italic">
+                                            {props.alt}
+                                        </p>
+                                    )}
+                                </div>
+                            ),
+                            table: ({ node, ...props }) => (
+                                <div className="overflow-x-auto my-8 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
+                                    <table {...props} className="w-full text-left border-collapse" />
+                                </div>
+                            ),
+                            th: ({ node, ...props }) => (
+                                <th
+                                    {...props}
+                                    className="bg-gray-50/50 dark:bg-white/5 p-4 font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/10 whitespace-nowrap"
+                                />
+                            ),
+                            td: ({ node, ...props }) => (
+                                <td
+                                    {...props}
+                                    className="p-4 border-b border-gray-100 dark:border-white/5 text-gray-700 dark:text-gray-300"
+                                />
+                            ),
+                        }}
+                    >
+                        {post.content}
+                    </ReactMarkdown>
                 </div>
 
                 {/* Comments Section */}
