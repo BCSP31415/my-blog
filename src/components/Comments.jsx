@@ -19,7 +19,7 @@ const Comments = () => {
                     repo="BCSP31415/my-blog"
                     repoId="R_kgDOQhKFSA"
                     category="Announcements"
-                    categoryId="IC_kwDOQhKFSM4Czbp3"
+                    categoryId="DIC_kwDOQhKFSM4Czbp3"
                     mapping="pathname"
                     term="Welcome to @giscus/react component!"
                     reactionsEnabled="1"
