@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { blogConfig } from '../data';
+import { blogConfig } from '../blogConfig';
 
 const Hero = () => {
     return (

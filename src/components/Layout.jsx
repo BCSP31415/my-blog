@@ -1,6 +1,5 @@
 import Header from './Header';
 import Footer from './Footer';
-import SearchBar from './SearchBar';
 
 const Layout = ({ children }) => {
     return (
@@ -15,8 +14,7 @@ const Layout = ({ children }) => {
             </div>
             <div className="relative z-10">
                 <Header />
-                <SearchBar />
-                <main className="container mx-auto px-4 md:px-8 pt-28 pb-16">
+                <main className="container mx-auto px-4 md:px-8 pt-32 pb-16">
                     {children}
                 </main>
                 <Footer />

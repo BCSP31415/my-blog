@@ -16,6 +16,8 @@
   --color-prose-strong: #22d3ee;
   --color-prose-marker: #c084fc;
   --color-prose-border: rgba(255, 255, 255, 0.1);
+  --thoughts-text: #ffffff;
+  --thoughts-title: #ffffff;
 }
 
 /* Light theme */
@@ -29,6 +31,8 @@
   --color-prose-strong: #0ea5e9;
   --color-prose-marker: #ec4899;
   --color-prose-border: rgba(0, 0, 0, 0.1);
+  --thoughts-text: #374151;
+  --thoughts-title: #1f2937;
 }
 
 @layer base {

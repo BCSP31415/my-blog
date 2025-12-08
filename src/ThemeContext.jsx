@@ -54,6 +54,12 @@ export const ThemeProvider = ({ children }) => {
     useEffect(() => {
         // Apply theme to document
         document.documentElement.setAttribute('data-theme', appliedTheme);
+
+        if (appliedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     }, [appliedTheme]);
 
     const setTheme = (mode) => {

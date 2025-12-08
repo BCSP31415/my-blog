@@ -129,7 +129,7 @@ git push
 ## 📝 内容管理
 
 ### 1. 博客基础配置
-博客的名称、标语等全局配置位于 `src/data.js` 文件中。
+博客的名称、标语等全局配置位于 `src/blogConfig.js` 文件中。
 
 ```javascript
 export const blogConfig = {
@@ -141,7 +141,15 @@ export const blogConfig = {
 };
 ```
 
-### 2. 管理文章 (Markdown)
+### 2. 顶部导航栏 (Header)
+我们采用了全新的 **"Floating Islands" (浮岛)** 设计，分为三个区域：
+1.  **左侧功能区**：包含主页 Logo、分类、收藏夹和主题切换按钮。
+2.  **中间搜索区**：集成的实时搜索栏，输入关键词即可快速查找文章。
+3.  **右侧视图切换**：
+    -   **Blog**：传统的长文章列表视图。
+    -   **Thoughts**：类似社交媒体的短动态时间轴视图。
+
+### 3. 管理文章 (Markdown)
 所有的文章都作为独立的 `.md` 文件存放在 `src/posts/` 目录下。
 
 #### 📝 富文本功能支持 (New!)
@@ -161,6 +169,23 @@ export const blogConfig = {
 - 支持行内公式：`$E=mc^2$`
 - 支持块级公式：`$$ \int x dx $$`
 - 完美渲染复杂的数学符号和矩阵。
+
+### 5. 💭 发布短想法 (Thoughts)
+新的 "Thoughts" 功能允许您发布类似推特 (Twitter) 的短动态。
+
+1.  打开 `src/data/thoughts.js` 文件。
+2.  在 `thoughts` 数组的**最前面**添加一个新的对象：
+
+```javascript
+{
+    id: 4, // 确保 ID 不重复 (递增)
+    date: "2025-12-08 10:00",
+    content: "今天天气真不错，适合写代码！☕️",
+    images: [] // 可选：["图片链接1", "图片链接2"]
+},
+```
+
+保存文件后，刷新页面并点击顶部右侧的 **"Thoughts"** 切换按钮即可查看。
 
 #### 如何添加新文章：
 1.  在 `src/posts/` 中创建一个新的 `.md` 文件（文件名建议使用英文，如 `my-first-post.md`）。

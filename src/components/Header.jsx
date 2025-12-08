@@ -1,12 +1,46 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { blogConfig } from '../data';
-import { Sun, Moon, Monitor, FolderOpen, Star, Search } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { blogConfig } from '../blogConfig';
+import { Sun, Moon, Monitor, Tag, Star, MessageCircle, Search, X } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
 const Header = () => {
     const { themeMode, setTheme } = useTheme();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [query, setQuery] = useState('');
 
+    // --- Search Logic ---
+    useEffect(() => {
+        if (location.pathname === '/search') {
+            const params = new URLSearchParams(location.search);
+            const q = params.get('q');
+            if (q) setQuery(q);
+        } else {
+            setQuery('');
+        }
+    }, [location.pathname, location.search]);
+
+    const handleSearch = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+
+        if (newQuery.trim()) {
+            navigate(`/search?q=${encodeURIComponent(newQuery)}`);
+        } else if (location.pathname === '/search') {
+            navigate('/search');
+        }
+    };
+
+    const clearSearch = () => {
+        setQuery('');
+        if (location.pathname === '/search') {
+            navigate('/search');
+        }
+    };
+
+    // --- Theme Logic ---
     const cycleTheme = () => {
         const modes = ['light', 'dark', 'system'];
         const currentIndex = modes.indexOf(themeMode);
@@ -16,59 +50,104 @@ const Header = () => {
 
     const getIcon = () => {
         switch (themeMode) {
-            case 'light':
-                return <Sun className="w-4 h-4" />;
-            case 'dark':
-                return <Moon className="w-4 h-4" />;
-            case 'system':
-                return <Monitor className="w-4 h-4" />;
-            default:
-                return <Monitor className="w-4 h-4" />;
+            case 'light': return <Sun className="w-4 h-4" />;
+            case 'dark': return <Moon className="w-4 h-4" />;
+            case 'system': return <Monitor className="w-4 h-4" />;
+            default: return <Monitor className="w-4 h-4" />;
         }
     };
 
+    const navLinkClass = (path) =>
+        `p-2 rounded-full transition-colors ${location.pathname === path ? 'bg-white/50 text-black dark:bg-white/20 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`;
+
+    const isThoughts = location.pathname === '/thoughts';
+
     return (
         <motion.header
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-4 left-4 z-50 flex items-center gap-3 px-5 py-3 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg shadow-black/5"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col md:flex-row items-center gap-4 w-full max-w-4xl px-4 pointer-events-none"
         >
-            <div className="text-lg font-bold tracking-tight text-tempo-text">
-                {blogConfig.name}
+            {/* ISLAND 1: Logo & Nav Tools */}
+            <nav className="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20">
+                <Link to="/" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition-colors mr-1">
+                    <span className="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-purple-600 dark:from-cyan-400 dark:to-purple-500">
+                        B
+                    </span>
+                </Link>
+
+                <div className="w-px h-5 bg-black/10 dark:bg-white/10 mx-1" />
+
+                <Link to="/categories" className={navLinkClass('/categories')} aria-label="Categories">
+                    <Tag size={18} />
+                </Link>
+                <Link to="/favorites" className={navLinkClass('/favorites')} aria-label="Favorites">
+                    <Star size={18} />
+                </Link>
+
+                <div className="w-px h-5 bg-black/10 dark:bg-white/10 mx-1" />
+
+                <button
+                    onClick={cycleTheme}
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                    aria-label="Toggle theme"
+                >
+                    {getIcon()}
+                </button>
+            </nav>
+
+            {/* ISLAND 2: Integrated Search */}
+            <div className="pointer-events-auto relative flex-1 w-full max-w-md">
+                <div className="relative flex items-center w-full p-0.5 rounded-full backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20 transition-all focus-within:bg-white/80 dark:focus-within:bg-black/60 focus-within:ring-2 focus-within:ring-cyan-500/20">
+                    <Search className="absolute left-3 w-4 h-4 text-gray-500 dark:text-gray-400" />
+                    <input
+                        type="text"
+                        value={query}
+                        onChange={handleSearch}
+                        placeholder="Search..."
+                        className="w-full py-2 pl-9 pr-9 bg-transparent border-none outline-none text-sm text-gray-800 dark:text-gray-200 placeholder-gray-500/80"
+                    />
+                    {query && (
+                        <button
+                            onClick={clearSearch}
+                            className="absolute right-2 p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                        >
+                            <X className="w-3 h-3 text-gray-500 dark:text-gray-400" />
+                        </button>
+                    )}
+                </div>
             </div>
-            <div className="w-px h-5 bg-white/20"></div>
 
-            {/* Mobile Search Button */}
-            <Link
-                to="/search"
-                className="lg:hidden flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Search"
-            >
-                <Search className="w-4 h-4" />
-            </Link>
-
-            <Link
-                to="/categories"
-                className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Categories"
-            >
-                <FolderOpen className="w-4 h-4" />
-            </Link>
-            <Link
-                to="/favorites"
-                className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Favorites"
-            >
-                <Star className="w-4 h-4" />
-            </Link>
-            <button
-                onClick={cycleTheme}
-                className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-white/10 transition-colors"
-                aria-label="Toggle theme"
-            >
-                {getIcon()}
-            </button>
+            {/* ISLAND 3: View Switcher (Blog/Thoughts) */}
+            <div className="pointer-events-auto flex items-center p-1 rounded-full backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20 relative">
+                <Link
+                    to="/"
+                    className={`relative z-10 px-4 h-8 flex items-center justify-center text-sm font-medium transition-colors duration-200 ${!isThoughts ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
+                >
+                    {!isThoughts && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 rounded-full bg-white dark:bg-white/20 shadow-sm -z-10"
+                            transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                        />
+                    )}
+                    Blog
+                </Link>
+                <Link
+                    to="/thoughts"
+                    className={`relative z-10 px-4 h-8 flex items-center justify-center text-sm font-medium transition-colors duration-200 ${isThoughts ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
+                >
+                    {isThoughts && (
+                        <motion.div
+                            layoutId="activeTab"
+                            className="absolute inset-0 rounded-full bg-white dark:bg-white/20 shadow-sm -z-10"
+                            transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                        />
+                    )}
+                    Thoughts
+                </Link>
+            </div>
         </motion.header>
     );
 };
