@@ -8,11 +8,25 @@ const Thoughts = () => {
     return (
         <Layout>
             <div className="max-w-2xl mx-auto pt-20 px-4">
-                <header className="mb-12 text-center">
-                    <h1 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400">
-                        Thoughts
-                    </h1>
-                    <p className="text-gray-400">Random musings, quick updates, and shower thoughts.</p>
+                <header className="mb-20 text-center">
+                    <motion.h1
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1] mb-6 text-[var(--thoughts-page-title)]"
+                    >
+                        Thoughts <br />
+                        <span className="text-gray-400 dark:text-gray-500">Stream</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed"
+                    >
+                        A collection of random musings, development updates, and fleeting ideas.
+                        This is where I capture the stream of consciousness that doesn't quite fit into full articles.
+                    </motion.p>
                 </header>
 
                 <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 dark:before:via-white/10 before:to-transparent">

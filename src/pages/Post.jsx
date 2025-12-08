@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, Star } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -18,6 +18,13 @@ const Post = () => {
     const { isFavorite, toggleFavorite } = useFavorites();
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const { scrollYProgress } = useScroll();
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
 
     useEffect(() => {
         getPostBySlug(slug)
@@ -61,6 +68,12 @@ const Post = () => {
 
     return (
         <Layout>
+            {/* Reading Progress Bar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--progress-start)] to-[var(--progress-end)] origin-left z-50"
+                style={{ scaleX }}
+            />
+
             {/* Back Button */}
             <motion.button
                 initial={{ opacity: 0, x: -20 }}

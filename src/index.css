@@ -18,6 +18,11 @@
   --color-prose-border: rgba(255, 255, 255, 0.1);
   --thoughts-text: #ffffff;
   --thoughts-title: #ffffff;
+  --progress-start: #e5e7eb;
+  /* gray-200 */
+  --progress-end: #ffffff;
+  /* white */
+  --thoughts-page-title: #ffffff;
 }
 
 /* Light theme */
@@ -33,6 +38,11 @@
   --color-prose-border: rgba(0, 0, 0, 0.1);
   --thoughts-text: #374151;
   --thoughts-title: #1f2937;
+  --progress-start: #4b5563;
+  /* gray-600 */
+  --progress-end: #0f172a;
+  /* gray-900 */
+  --thoughts-page-title: #000000;
 }
 
 @layer base {

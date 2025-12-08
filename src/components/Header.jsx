@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { blogConfig } from '../blogConfig';
 import { Sun, Moon, Monitor, Tag, Star, MessageCircle, Search, X } from 'lucide-react';
@@ -58,7 +58,7 @@ const Header = () => {
     };
 
     const navLinkClass = (path) =>
-        `p-2 rounded-full transition-colors ${location.pathname === path ? 'bg-white/50 text-black dark:bg-white/20 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`;
+        `p-1.5 rounded-full transition-colors ${location.pathname === path ? 'bg-white/50 text-black dark:bg-white/20 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'}`;
 
     const isThoughts = location.pathname === '/thoughts';
 
@@ -70,14 +70,14 @@ const Header = () => {
             className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col md:flex-row items-center gap-4 w-full max-w-4xl px-4 pointer-events-none"
         >
             {/* ISLAND 1: Logo & Nav Tools */}
-            <nav className="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20">
-                <Link to="/" className="w-9 h-9 rounded-full flex items-center justify-center bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition-colors mr-1">
+            <nav className="pointer-events-auto flex items-center gap-1 p-1 rounded-full backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20">
+                <Link to="/" className="w-8 h-8 rounded-full flex items-center justify-center bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition-colors mr-1">
                     <span className="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-br from-cyan-500 to-purple-600 dark:from-cyan-400 dark:to-purple-500">
                         B
                     </span>
                 </Link>
 
-                <div className="w-px h-5 bg-black/10 dark:bg-white/10 mx-1" />
+                <div className="w-px h-4 bg-black/10 dark:bg-white/10 mx-1" />
 
                 <Link to="/categories" className={navLinkClass('/categories')} aria-label="Categories">
                     <Tag size={18} />
@@ -85,16 +85,6 @@ const Header = () => {
                 <Link to="/favorites" className={navLinkClass('/favorites')} aria-label="Favorites">
                     <Star size={18} />
                 </Link>
-
-                <div className="w-px h-5 bg-black/10 dark:bg-white/10 mx-1" />
-
-                <button
-                    onClick={cycleTheme}
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
-                    aria-label="Toggle theme"
-                >
-                    {getIcon()}
-                </button>
             </nav>
 
             {/* ISLAND 2: Integrated Search */}
@@ -147,6 +137,34 @@ const Header = () => {
                     )}
                     Thoughts
                 </Link>
+            </div>
+
+            {/* ISLAND 4: Independent Theme Toggle */}
+            <div className="pointer-events-auto">
+                <motion.button
+                    onClick={cycleTheme}
+                    whileTap={{ scale: 0.9, rotate: 15 }}
+                    className="w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-2xl bg-white/60 dark:bg-black/40 border border-white/40 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/20 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-white/80 dark:hover:bg-black/60 transition-all overflow-hidden"
+                    aria-label="Toggle theme"
+                >
+                    <AnimatePresence mode="wait" initial={false}>
+                        <motion.div
+                            key={themeMode}
+                            initial={{ y: -20, opacity: 0, rotate: -90 }}
+                            animate={{ y: 0, opacity: 1, rotate: 0 }}
+                            exit={{ y: 20, opacity: 0, rotate: 90 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {themeMode === 'light' ? (
+                                <Sun className="w-5 h-5 text-amber-500 fill-amber-500" />
+                            ) : themeMode === 'dark' ? (
+                                <Moon className="w-5 h-5 text-indigo-400 fill-indigo-400" />
+                            ) : (
+                                <Monitor className="w-5 h-5" />
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </motion.button>
             </div>
         </motion.header>
     );
