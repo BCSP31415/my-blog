@@ -18,7 +18,7 @@ export default {
             },
             fontFamily: {
                 sans: ['var(--font-sans)', 'sans-serif'],
-                serif: ['var(--font-serif)', '"Noto Serif SC"', '"Songti SC"', '"SimSun"', 'serif'],
+                serif: ['var(--font-serif)', '"Songti SC"', '"SimSun"', '"STSong"', '"华文宋体"', 'serif'],
                 mono: ['var(--font-mono)', 'monospace'],
             },
             boxShadow: {
@@ -31,7 +31,7 @@ export default {
                     css: {
                         // Base text
                         color: theme('colors.gray.700'),
-                        fontFamily: '"Playfair Display", serif', // User requested serif for blog
+                        fontFamily: '"Playfair Display", "Songti SC", "SimSun", "STSong", "华文宋体", serif', // User requested Songti for Chinese
                         lineHeight: '1.8',
                         fontSize: '1.125rem',
 
@@ -44,7 +44,7 @@ export default {
                         // Headers
                         h1: {
                             color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", serif',
+                            fontFamily: '"Playfair Display", "Songti SC", "SimSun", "STSong", "华文宋体", serif',
                             fontWeight: '900',
                             fontSize: '3em',
                             marginTop: '0',
@@ -53,7 +53,7 @@ export default {
                         },
                         h2: {
                             color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", serif',
+                            fontFamily: '"Playfair Display", "Songti SC", "SimSun", "STSong", "华文宋体", serif',
                             fontWeight: '800',
                             fontSize: '2.25em',
                             marginTop: '2em',
@@ -64,7 +64,7 @@ export default {
                         },
                         h3: {
                             color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", serif',
+                            fontFamily: '"Playfair Display", "Songti SC", "SimSun", "STSong", "华文宋体", serif',
                             fontWeight: '700',
                             fontSize: '1.75em',
                             marginTop: '2em',
@@ -94,7 +94,7 @@ export default {
                             color: theme('colors.black'),
                             borderLeftColor: theme('colors.black'),
                             borderLeftWidth: '4px',
-                            fontFamily: '"Playfair Display", serif',
+                            fontFamily: '"Playfair Display", "Songti SC", "SimSun", "STSong", "华文宋体", serif',
                             fontStyle: 'italic',
                             fontWeight: '500',
                             fontSize: '1.5em', // Editorial quote size
