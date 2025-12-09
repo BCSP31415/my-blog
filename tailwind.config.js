@@ -12,94 +12,107 @@ export default {
                 'tempo-text': 'var(--color-tempo-text)',
                 'tempo-border': 'var(--color-tempo-border)',
                 'tempo-accent': 'var(--color-tempo-accent)',
+                'neo-yellow': 'var(--color-neo-yellow)',
+                'neo-black': 'var(--color-neo-black)',
+                'neo-white': 'var(--color-neo-white)',
             },
             fontFamily: {
                 sans: ['var(--font-sans)', 'sans-serif'],
+                serif: ['var(--font-serif)', '"Noto Serif SC"', '"Songti SC"', '"SimSun"', 'serif'],
+                mono: ['var(--font-mono)', 'monospace'],
+            },
+            boxShadow: {
+                'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+                'neo-sm': '2px 2px 0px 0px rgba(0,0,0,1)',
+                'neo-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
             },
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
                         // Base text
-                        color: theme('colors.gray.300'),
-                        lineHeight: '2', // Very loose line height for "breathing room"
-                        fontSize: '1.125rem', // 18px base size
+                        color: theme('colors.gray.700'),
+                        fontFamily: '"Playfair Display", serif', // User requested serif for blog
+                        lineHeight: '1.8',
+                        fontSize: '1.125rem',
 
                         // Paragraphs
                         p: {
                             marginTop: '0',
-                            marginBottom: '2em', // Huge spacing between paragraphs
+                            marginBottom: '1.5em',
                         },
 
-                        // Headers - Territory
+                        // Headers
                         h1: {
-                            color: theme('colors.tempo-text'),
-                            fontWeight: '900', // Black weight
-                            fontSize: '2.5em',
+                            color: theme('colors.black'),
+                            fontFamily: '"Playfair Display", serif',
+                            fontWeight: '900',
+                            fontSize: '3em',
                             marginTop: '0',
-                            marginBottom: '1em',
+                            marginBottom: '0.5em',
                             lineHeight: '1.1',
                         },
                         h2: {
-                            color: theme('colors.tempo-text'),
-                            fontWeight: '800', // ExtraBold
-                            fontSize: '2em',
-                            marginTop: '3em', // Massive space above sections
+                            color: theme('colors.black'),
+                            fontFamily: '"Playfair Display", serif',
+                            fontWeight: '800',
+                            fontSize: '2.25em',
+                            marginTop: '2em',
                             marginBottom: '1em',
                             lineHeight: '1.2',
-                            borderBottom: '1px solid rgba(255,255,255,0.1)', // Visual separator
-                            paddingBottom: '0.5em',
+                            borderBottom: '2px solid #000', // Neo border
+                            paddingBottom: '0.2em',
                         },
                         h3: {
-                            color: theme('colors.tempo-text'),
+                            color: theme('colors.black'),
+                            fontFamily: '"Playfair Display", serif',
                             fontWeight: '700',
-                            fontSize: '1.5em',
-                            marginTop: '2.5em',
+                            fontSize: '1.75em',
+                            marginTop: '2em',
                             marginBottom: '0.75em',
                         },
 
-                        // Highlights - Visual Anchors
+                        // Highlights
                         strong: {
-                            color: '#22d3ee', // Cyan
-                            fontWeight: '900', // Black weight
+                            color: theme('colors.black'),
+                            fontWeight: '700',
+                            backgroundColor: 'var(--color-neo-yellow)', // Highlight effect
+                            padding: '0 4px',
                         },
 
-                        // Lists - Graphical
+                        // Lists
                         ul: {
                             listStyleType: 'disc',
                             paddingLeft: '1.5em',
                             marginBottom: '2em',
                         },
-                        ol: {
-                            listStyleType: 'decimal',
-                            paddingLeft: '1.5em',
-                            marginBottom: '2em',
-                        },
-                        'ul > li': {
-                            paddingLeft: '0.5em',
-                            marginBottom: '0.5em', // Space between list items
-                        },
                         'ul > li::marker': {
-                            color: '#22d3ee', // Cyan bullets
-                        },
-                        'ol > li': {
-                            paddingLeft: '0.5em',
-                            marginBottom: '0.5em',
-                        },
-                        'ol > li::marker': {
-                            color: '#22d3ee', // Cyan numbers
-                            fontWeight: '700',
+                            color: theme('colors.black'),
                         },
 
                         // Quotes
                         blockquote: {
-                            color: theme('colors.gray.200'),
-                            borderLeftColor: '#22d3ee',
+                            color: theme('colors.black'),
+                            borderLeftColor: theme('colors.black'),
                             borderLeftWidth: '4px',
+                            fontFamily: '"Playfair Display", serif',
                             fontStyle: 'italic',
-                            paddingLeft: '1.5em',
-                            marginTop: '2.5em',
-                            marginBottom: '2.5em',
+                            fontWeight: '500',
+                            fontSize: '1.5em', // Editorial quote size
+                            paddingLeft: '1em',
+                            marginTop: '2em',
+                            marginBottom: '2em',
                         },
+
+                        // Code
+                        code: {
+                            fontFamily: '"Space Mono", monospace',
+                            backgroundColor: '#f1f5f9',
+                            padding: '2px 4px',
+                            borderRadius: '2px',
+                            fontWeight: '400',
+                        },
+                        'code::before': { content: '""' },
+                        'code::after': { content: '""' },
                     },
                 },
             }),

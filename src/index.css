@@ -3,30 +3,16 @@
 
 @theme {
   --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --color-neo-yellow: #EBFF00;
+  --color-neo-black: #000000;
+  --color-neo-white: #FFFFFF;
 }
 
-/* Dark theme (default) */
-[data-theme="dark"] {
-  --color-tempo-bg: #0a0a0a;
-  --color-tempo-text: #ededed;
-  --color-tempo-border: rgba(255, 255, 255, 0.1);
-  --color-tempo-accent: #22d3ee;
-  --color-prose-text: #e2e8f0;
-  --color-prose-heading: #f8fafc;
-  --color-prose-strong: #22d3ee;
-  --color-prose-marker: #c084fc;
-  --color-prose-border: rgba(255, 255, 255, 0.1);
-  --thoughts-text: #ffffff;
-  --thoughts-title: #ffffff;
-  --progress-start: #e5e7eb;
-  /* gray-200 */
-  --progress-end: #ffffff;
-  /* white */
-  --thoughts-page-title: #ffffff;
-}
-
-/* Light theme */
-[data-theme="light"] {
+/* Light theme (default via :root) */
+:root {
   --color-tempo-bg: #ffffff;
   --color-tempo-text: #1e293b;
   --color-tempo-border: rgba(0, 0, 0, 0.1);
@@ -39,10 +25,27 @@
   --thoughts-text: #374151;
   --thoughts-title: #1f2937;
   --progress-start: #4b5563;
-  /* gray-600 */
   --progress-end: #0f172a;
-  /* gray-900 */
   --thoughts-page-title: #000000;
+}
+
+/* Dark theme overrides - Atmospheric */
+[data-theme="dark"],
+.dark {
+  --color-tempo-bg: #0a0a0a;
+  --color-tempo-text: #c9d1d9;
+  --color-tempo-border: rgba(48, 54, 61, 0.6);
+  --color-tempo-accent: #58a6ff;
+  --color-prose-text: #b0b8c1;
+  --color-prose-heading: #e6edf3;
+  --color-prose-strong: #79c0ff;
+  --color-prose-marker: #a371f7;
+  --color-prose-border: rgba(48, 54, 61, 0.4);
+  --thoughts-text: #c9d1d9;
+  --thoughts-title: #e6edf3;
+  --progress-start: #21262d;
+  --progress-end: #58a6ff;
+  --thoughts-page-title: #e6edf3;
 }
 
 @layer base {

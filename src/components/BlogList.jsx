@@ -30,19 +30,19 @@ const BlogList = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post, index) => (
                     <Link to={`/post/${post.slug}`} key={post.id} className="block group">
-                        <GlassCard className="h-full p-6">
-                            <div className="flex justify-between items-start mb-4">
-                                <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">{post.category}</span>
-                                <span className="text-xs text-gray-600">{post.date}</span>
+                        <div className="h-full p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-neo-black hover:bg-neo-yellow dark:hover:bg-neo-yellow transition-colors relative shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+                            <div className="flex justify-between items-start mb-4 font-mono text-xs text-gray-500 dark:text-gray-400 uppercase group-hover:text-neo-black">
+                                <span>{post.category}</span>
+                                <span>{post.date}</span>
                             </div>
-                            <h3 className="text-xl font-semibold mb-2 group-hover:text-white transition-colors flex items-center gap-2">
+                            <h3 className="text-2xl font-serif font-bold mb-3 text-neo-black dark:text-neo-white group-hover:text-neo-black group-hover:underline decoration-2 underline-offset-4">
                                 {post.title}
-                                <ArrowUpRight className="w-4 h-4 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                             </h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-serif group-hover:text-neo-black">
                                 {post.excerpt}
                             </p>
-                        </GlassCard>
+                            <ArrowUpRight className="absolute top-4 right-4 w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-neo-black" />
+                        </div>
                     </Link>
                 ))}
             </div>

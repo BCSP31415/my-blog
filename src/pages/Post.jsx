@@ -107,66 +107,95 @@ const Post = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="max-w-3xl mx-auto"
+                className="max-w-4xl mx-auto my-12"
             >
-                {/* Category and Date */}
-                <div className="flex items-center gap-3 text-sm text-gray-500 mb-6">
-                    <span className="uppercase tracking-wider font-medium">{post.category}</span>
-                    <span>•</span>
-                    <time>{post.date}</time>
-                </div>
+                {/* Brutalist Container */}
+                <div className="bg-white dark:bg-[#0d1117] border-2 border-neo-black dark:border-gray-700 shadow-neo dark:shadow-[0_0_30px_rgba(34,211,238,0.15),8px_8px_0px_0px_rgba(100,100,100,0.3)] p-8 md:p-12 relative transition-colors duration-300 dark:ring-1 dark:ring-gray-800">
 
-                {/* Title */}
-                <h1 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                    {post.title}
-                </h1>
+                    {/* Header Block */}
+                    <div className="border-b-2 border-dashed border-neo-black/30 dark:border-white/30 pb-8 mb-12">
+                        <div className="flex flex-wrap items-center gap-4 font-mono text-sm text-neo-black dark:text-neo-white mb-6 uppercase tracking-wider">
+                            <span className="px-3 py-1 bg-neo-yellow text-neo-black border border-neo-black font-bold">
+                                {post.category}
+                            </span>
+                            <span className="text-gray-500 dark:text-gray-400">
+                                ///
+                            </span>
+                            <time className="border-b border-neo-black dark:border-white">
+                                {post.date}
+                            </time>
+                        </div>
 
-                {/* Content */}
-                <div className="prose prose-lg max-w-none mb-16">
-                    <ReactMarkdown
-                        remarkPlugins={[remarkGfm, remarkMath]}
-                        rehypePlugins={[rehypeKatex]}
-                        components={{
-                            img: ({ node, ...props }) => (
-                                <div className="my-8">
-                                    <img
+                        <h1 className="text-4xl md:text-6xl font-serif font-black leading-tight text-neo-black dark:text-neo-white">
+                            {post.title}
+                        </h1>
+                    </div>
+
+                    {/* Content */}
+                    <div className="prose prose-lg max-w-none mb-16 dark:prose-invert prose-headings:font-serif prose-headings:font-bold prose-p:font-serif prose-p:leading-loose prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:bg-neo-yellow hover:prose-a:text-black transition-colors">
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm, remarkMath]}
+                            rehypePlugins={[rehypeKatex]}
+                            components={{
+                                img: ({ node, ...props }) => (
+                                    <div className="my-12">
+                                        <div className="border-2 border-neo-black dark:border-white p-2 bg-white dark:bg-neo-black shadow-sm inline-block w-full">
+                                            <img
+                                                {...props}
+                                                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500"
+                                                loading="lazy"
+                                                referrerPolicy="no-referrer"
+                                            />
+                                        </div>
+                                        {props.alt && (
+                                            <p className="text-left font-mono text-xs text-gray-500 dark:text-gray-400 mt-2 uppercase tracking-wide border-l-2 border-neo-yellow pl-3">
+                                                FIG_REF: {props.alt}
+                                            </p>
+                                        )}
+                                    </div>
+                                ),
+                                table: ({ node, ...props }) => (
+                                    <div className="overflow-x-auto my-12 border-2 border-neo-black dark:border-white">
+                                        <table {...props} className="w-full text-left border-collapse" />
+                                    </div>
+                                ),
+                                th: ({ node, ...props }) => (
+                                    <th
                                         {...props}
-                                        className="rounded-xl shadow-lg border border-white/10 w-full h-auto object-cover"
-                                        loading="lazy"
-                                        referrerPolicy="no-referrer"
+                                        className="bg-neo-black dark:bg-white text-neo-white dark:text-neo-black p-4 font-mono text-sm font-bold border-b-2 border-neo-black dark:border-white whitespace-nowrap uppercase"
                                     />
-                                    {props.alt && (
-                                        <p className="text-center text-sm text-gray-500 mt-2 italic">
-                                            {props.alt}
-                                        </p>
-                                    )}
-                                </div>
-                            ),
-                            table: ({ node, ...props }) => (
-                                <div className="overflow-x-auto my-8 rounded-xl border border-gray-200 dark:border-white/10 shadow-sm">
-                                    <table {...props} className="w-full text-left border-collapse" />
-                                </div>
-                            ),
-                            th: ({ node, ...props }) => (
-                                <th
-                                    {...props}
-                                    className="bg-gray-50/50 dark:bg-white/5 p-4 font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/10 whitespace-nowrap"
-                                />
-                            ),
-                            td: ({ node, ...props }) => (
-                                <td
-                                    {...props}
-                                    className="p-4 border-b border-gray-100 dark:border-white/5 text-gray-700 dark:text-gray-300"
-                                />
-                            ),
-                        }}
-                    >
-                        {post.content}
-                    </ReactMarkdown>
-                </div>
+                                ),
+                                td: ({ node, ...props }) => (
+                                    <td
+                                        {...props}
+                                        className="p-4 border-b border-neo-black/10 dark:border-white/10 font-serif text-sm border-r border-neo-black/10 dark:border-white/10 last:border-r-0"
+                                    />
+                                ),
+                                code: ({ node, inline, className, children, ...props }) => {
+                                    return inline ? (
+                                        <code className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded font-mono text-sm border border-gray-300 dark:border-gray-600" {...props}>
+                                            {children}
+                                        </code>
+                                    ) : (
+                                        <pre className="bg-neo-black text-gray-200 p-6 rounded-none border-l-4 border-neo-yellow overflow-x-auto my-8 font-mono text-sm shadow-inner">
+                                            <code className="bg-transparent" {...props}>
+                                                {children}
+                                            </code>
+                                        </pre>
+                                    );
+                                }
+                            }}
+                        >
+                            {post.content}
+                        </ReactMarkdown>
+                    </div>
 
-                {/* Comments Section */}
-                <Comments postSlug={slug} />
+                    {/* Comments Section */}
+                    <div className="border-t-4 border-neo-black dark:border-white pt-12 mt-12">
+                        <h3 className="font-mono text-xl font-bold mb-8 uppercase text-neo-black dark:text-neo-white">/// User_Comments</h3>
+                        <Comments postSlug={slug} />
+                    </div>
+                </div>
             </motion.article>
         </Layout>
     );
