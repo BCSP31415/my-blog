@@ -93,9 +93,9 @@ const BrutalistHero = () => {
     };
 
     return (
-        <section className="relative w-full max-w-6xl mx-auto my-12 border-2 border-neo-black dark:border-white bg-white dark:bg-neo-black shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+        <section className="relative w-full max-w-6xl mx-auto my-12 border-2 border-neo-black dark:border-white bg-white dark:bg-[#161616] shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
             {/* Header Block */}
-            <div className="border-b-2 border-neo-black dark:border-white p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-neo-white dark:bg-neo-black">
+            <div className="border-b-2 border-neo-black dark:border-white p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-neo-white dark:bg-[#161616]">
                 <div>
                     <h1 className="text-6xl md:text-8xl font-serif font-black tracking-tighter leading-none mb-2 text-neo-black dark:text-neo-white">
                         THE BLOG

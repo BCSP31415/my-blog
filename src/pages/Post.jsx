@@ -110,7 +110,7 @@ const Post = () => {
                 className="max-w-4xl mx-auto my-12"
             >
                 {/* Brutalist Container */}
-                <div className="bg-white dark:bg-[#0d1117] border-2 border-neo-black dark:border-gray-700 shadow-neo dark:shadow-[0_0_30px_rgba(34,211,238,0.15),8px_8px_0px_0px_rgba(100,100,100,0.3)] p-8 md:p-12 relative transition-colors duration-300 dark:ring-1 dark:ring-gray-800">
+                <div className="bg-white dark:bg-[#161616] border-2 border-neo-black dark:border-white shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] p-8 md:p-12 relative transition-colors duration-300">
 
                     {/* Header Block */}
                     <div className="border-b-2 border-dashed border-neo-black/30 dark:border-white/30 pb-8 mb-12">

@@ -13,6 +13,7 @@
 
 /* Light theme (default via :root) */
 :root {
+  color-scheme: light;
   --color-tempo-bg: #ffffff;
   --color-tempo-text: #1e293b;
   --color-tempo-border: rgba(0, 0, 0, 0.1);
@@ -29,23 +30,26 @@
   --thoughts-page-title: #000000;
 }
 
-/* Dark theme overrides - Atmospheric */
+/* Dark theme overrides - High Contrast Brutalist */
 [data-theme="dark"],
 .dark {
-  --color-tempo-bg: #0a0a0a;
-  --color-tempo-text: #c9d1d9;
-  --color-tempo-border: rgba(48, 54, 61, 0.6);
-  --color-tempo-accent: #58a6ff;
-  --color-prose-text: #b0b8c1;
-  --color-prose-heading: #e6edf3;
-  --color-prose-strong: #79c0ff;
-  --color-prose-marker: #a371f7;
-  --color-prose-border: rgba(48, 54, 61, 0.4);
-  --thoughts-text: #c9d1d9;
-  --thoughts-title: #e6edf3;
-  --progress-start: #21262d;
-  --progress-end: #58a6ff;
-  --thoughts-page-title: #e6edf3;
+  color-scheme: dark;
+  /* extensive browser override */
+  --color-tempo-bg: #161616;
+  /* Soft Black */
+  --color-tempo-text: #ffffff;
+  --color-tempo-border: #ffffff;
+  --color-tempo-accent: #EBFF00;
+  --color-prose-text: #e2e8f0;
+  --color-prose-heading: #ffffff;
+  --color-prose-strong: #EBFF00;
+  --color-prose-marker: #EBFF00;
+  --color-prose-border: #ffffff;
+  --thoughts-text: #ffffff;
+  --thoughts-title: #ffffff;
+  --progress-start: #333333;
+  --progress-end: #ffffff;
+  --thoughts-page-title: #ffffff;
 }
 
 @layer base {
@@ -55,16 +59,14 @@
     color: var(--color-tempo-text);
     min-height: 100vh;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Dark mode gradient background */
-  [data-theme="dark"] body {
-    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-  }
-
-  /* Light mode gradient background */
-  [data-theme="light"] body {
-    background: radial-gradient(ellipse at top, #f0f9ff 0%, #ffffff 100%);
+  /* Force dark mode background on body when dark class is present on html */
+  :global(html.dark) body {
+    background-color: #161616 !important;
+    /* Soft Black */
+    color: #ffffff !important;
   }
 }
 

@@ -30,7 +30,7 @@ const BlogList = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post, index) => (
                     <Link to={`/post/${post.slug}`} key={post.id} className="block group">
-                        <div className="h-full p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-neo-black hover:bg-neo-yellow dark:hover:bg-neo-yellow transition-colors relative shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+                        <div className="h-full p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-[#161616] hover:bg-neo-yellow dark:hover:bg-neo-yellow transition-colors relative shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
                             <div className="flex justify-between items-start mb-4 font-mono text-xs text-gray-500 dark:text-gray-400 uppercase group-hover:text-neo-black">
                                 <span>{post.category}</span>
                                 <span>{post.date}</span>

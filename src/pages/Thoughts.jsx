@@ -31,7 +31,7 @@ const Thoughts = () => {
                             {/* Connector Line/Dot */}
                             <div className="absolute -left-[5px] md:-left-[53px] top-6 w-3 h-3 bg-neo-black dark:bg-white border-2 border-white dark:border-neo-black rounded-full z-10" />
 
-                            <div className="p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-neo-black shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                            <div className="p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-[#161616] shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
                                 {/* Header */}
                                 <div className="flex items-center justify-between mb-4 border-b-2 border-gray-100 dark:border-white/10 pb-4">
                                     <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ const Thoughts = () => {
                                 {thought.images && thought.images.length > 0 && (
                                     <div className={`grid gap-4 mb-6 ${thought.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                                         {thought.images.map((img, i) => (
-                                            <div key={i} className="border-2 border-neo-black dark:border-white p-1 bg-white dark:bg-neo-black">
+                                            <div key={i} className="border-2 border-neo-black dark:border-white p-1 bg-white dark:bg-[#161616]">
                                                 <img
                                                     src={img}
                                                     alt="Thought attachment"

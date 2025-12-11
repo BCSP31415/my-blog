@@ -4,7 +4,7 @@ import { Sun, Moon, Monitor, Search, X } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
 const Header = () => {
-    const { themeMode, setTheme } = useTheme();
+    const { themeMode, appliedTheme, setTheme } = useTheme();
     const location = useLocation();
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
@@ -74,13 +74,23 @@ const Header = () => {
                     <NavLink to="/">HOME</NavLink>
                     <NavLink to="/thoughts">THOUGHTS</NavLink>
                     {/* Theme Toggle as a block */}
-                    <div className="border-l-2 border-neo-black dark:border-white h-full flex items-center px-4 bg-white dark:bg-neo-black transition-colors">
+                    <div className="border-l-2 border-neo-black dark:border-white h-full flex items-center px-4 bg-white dark:bg-neo-black transition-colors relative group">
+                        {themeMode === 'system' && (
+                            <div className="absolute top-2 right-2 text-[8px] font-mono font-bold bg-neo-yellow text-neo-black px-1 border border-neo-black rounded z-10 pointer-events-none">
+                                AUTO
+                            </div>
+                        )}
                         <button
                             onClick={cycleTheme}
-                            className="relative w-14 h-8 bg-gray-200 dark:bg-gray-800 rounded-full border-2 border-neo-black dark:border-white transition-colors overflow-hidden p-1 flex items-center"
+                            className="relative w-16 h-8 bg-gray-200 dark:bg-gray-800 rounded-full border-2 border-neo-black dark:border-white transition-colors overflow-hidden p-1 flex items-center"
+                            aria-label={`Current theme: ${themeMode}`}
                         >
-                            <div className={`absolute top-1 bottom-1 w-6 bg-neo-yellow dark:bg-white rounded-full border border-neo-black dark:border-none shadow-sm transition-transform duration-300 ${themeMode === 'dark' ? 'translate-x-full border-transparent' : 'translate-x-0'}`}>
-                                {themeMode === 'dark' && <div className="absolute top-1 right-1 w-2 h-2 bg-gray-900 rounded-full" />}
+                            <div className={`absolute top-1 bottom-1 w-6 bg-neo-yellow dark:bg-white rounded-full border border-neo-black dark:border-none shadow-sm transition-transform duration-300 z-10 flex items-center justify-center ${appliedTheme === 'dark' ? 'translate-x-[32px] border-transparent' : 'translate-x-0'}`}>
+                                {themeMode === 'system' ? (
+                                    <Monitor size={12} className="text-neo-black" />
+                                ) : appliedTheme === 'dark' ? (
+                                    <div className="w-2 h-2 bg-gray-900 rounded-full" />
+                                ) : null}
                             </div>
                             <div className="w-full flex justify-between px-1.5 z-0">
                                 <Sun size={12} className="text-gray-500 opacity-50" />

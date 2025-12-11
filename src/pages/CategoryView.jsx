@@ -68,26 +68,26 @@ const CategoryView = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {posts.map((post, index) => (
                             <Link to={`/post/${post.slug}`} key={post.id} className="block group">
-                                <GlassCard className="h-full p-6">
+                                <div className="h-full p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-[#161616] hover:bg-neo-yellow dark:hover:bg-neo-yellow transition-colors relative shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
                                     <motion.div
                                         initial={{ y: 20, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                     >
-                                        <div className="flex justify-between items-start mb-4">
-                                            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <div className="flex justify-between items-start mb-4 font-mono">
+                                            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider group-hover:text-neo-black">
                                                 {post.category}
                                             </span>
-                                            <span className="text-xs text-gray-600">{post.date}</span>
+                                            <span className="text-xs text-gray-600 dark:text-gray-400 group-hover:text-neo-black">{post.date}</span>
                                         </div>
-                                        <h3 className="text-xl font-semibold mb-2 group-hover:text-white transition-colors">
+                                        <h3 className="text-xl font-serif font-bold mb-3 text-neo-black dark:text-neo-white group-hover:text-neo-black transition-colors">
                                             {post.title}
                                         </h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-serif group-hover:text-neo-black">
                                             {post.excerpt}
                                         </p>
                                     </motion.div>
-                                </GlassCard>
+                                </div>
                             </Link>
                         ))}
                     </div>
