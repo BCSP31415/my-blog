@@ -38,8 +38,8 @@ const Header = () => {
             <Link
                 to={to}
                 className={`
-                    px-4 py-2 font-mono text-sm border-l-2 border-neo-black h-full flex items-center hover:bg-neo-yellow transition-colors
-                    ${isActive ? 'bg-neo-black text-neo-white border-b-4 border-b-neo-yellow' : 'text-neo-black'}
+                    px-4 py-2 font-mono text-sm border-l-2 border-neo-black dark:border-white h-full flex items-center hover:bg-neo-yellow dark:hover:bg-neo-yellow hover:text-neo-black transition-colors
+                    ${isActive ? 'bg-neo-black dark:bg-white text-neo-white dark:text-neo-black border-b-4 border-b-neo-yellow' : 'text-neo-black dark:text-white'}
                 `}
             >
                 {children}
@@ -48,17 +48,17 @@ const Header = () => {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b-2 border-neo-black h-16 flex items-center justify-between pl-4 md:pl-8 pr-0">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#161616] border-b-2 border-neo-black dark:border-white h-16 flex items-center justify-between pl-4 md:pl-8 pr-0 transition-colors">
             {/* Logo Area */}
-            <Link to="/" className="font-serif font-black text-2xl tracking-tighter hover:text-gray-600 transition-colors">
+            <Link to="/" className="font-serif font-black text-2xl tracking-tighter text-neo-black dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                 B.LOG
             </Link>
 
             {/* Right: Nav & Utilities */}
             <div className="flex items-center h-full">
                 {/* Search - Desktop hidden for simplicity or brutalist input */}
-                <div className="hidden md:flex items-center h-full border-l-2 border-neo-black w-64">
-                    <div className="w-10 h-full flex items-center justify-center">
+                <div className="hidden md:flex items-center h-full border-l-2 border-neo-black dark:border-white w-64">
+                    <div className="w-10 h-full flex items-center justify-center text-neo-black dark:text-white">
                         <Search size={16} />
                     </div>
                     <input
@@ -66,7 +66,7 @@ const Header = () => {
                         value={query}
                         onChange={handleSearch}
                         placeholder="SEARCH_DB..."
-                        className="w-full h-full bg-transparent outline-none font-mono text-xs placeholder:text-gray-400"
+                        className="w-full h-full bg-transparent outline-none font-mono text-xs text-neo-black dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500"
                     />
                 </div>
 
