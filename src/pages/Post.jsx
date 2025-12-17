@@ -131,6 +131,23 @@ const Post = () => {
                         </h1>
                     </div>
 
+                    {/* Spotify Embed */}
+                    {post.spotify && (
+                        <div className="mb-12 border-2 border-neo-black dark:border-white p-2 bg-white dark:bg-neo-black shadow-neo dark:shadow-none">
+                            <iframe
+                                style={{ borderRadius: '0px' }}
+                                src={post.spotify}
+                                width="100%"
+                                height="152"
+                                frameBorder="0"
+                                allowFullScreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy"
+                                className="bg-neo-black"
+                            ></iframe>
+                        </div>
+                    )}
+
                     {/* Content */}
                     <div className="prose prose-lg max-w-none mb-16 dark:prose-invert prose-headings:font-serif prose-headings:font-bold prose-p:font-serif prose-p:leading-loose prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:bg-neo-yellow hover:prose-a:text-black transition-colors">
                         <ReactMarkdown
