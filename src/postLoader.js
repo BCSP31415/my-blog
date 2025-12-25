@@ -18,18 +18,24 @@ export async function getPosts() {
         continue;
       }
 
-      // Simple frontmatter parser
-      const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      // Improved frontmatter parser to handle different line endings and optional whitespace
+      const match = content.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/);
 
       if (match) {
         const frontmatterRaw = match[1];
         const body = match[2];
         const attributes = {};
 
-        frontmatterRaw.split('\n').forEach(line => {
-          const [key, ...value] = line.split(':');
-          if (key && value) {
-            attributes[key.trim()] = value.join(':').trim().replace(/^['"](.*)['"]$/, '$1');
+        // Split by any newline variation
+        frontmatterRaw.split(/\r?\n/).forEach(line => {
+          const separatorIndex = line.indexOf(':');
+          if (separatorIndex !== -1) {
+            const key = line.slice(0, separatorIndex).trim();
+            const value = line.slice(separatorIndex + 1).trim();
+            if (key) {
+              // Remove quotes if present
+              attributes[key] = value.replace(/^['"](.*)['"]$/, '$1');
+            }
           }
         });
 
@@ -47,7 +53,17 @@ export async function getPosts() {
     }
   }
 
-  return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return posts.sort((a, b) => {
+    // Check for pinned status (handle string 'true')
+    const isPinnedA = a.pinned === 'true';
+    const isPinnedB = b.pinned === 'true';
+
+    if (isPinnedA && !isPinnedB) return -1;
+    if (!isPinnedA && isPinnedB) return 1;
+
+    // Default to date sort
+    return new Date(b.date) - new Date(a.date);
+  });
 }
 
 export async function getPostBySlug(slug) {

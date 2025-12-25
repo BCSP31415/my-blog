@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Pin } from 'lucide-react';
 import { getPosts } from '../postLoader';
 import GlassCard from './GlassCard';
 
@@ -32,7 +32,12 @@ const BlogList = () => {
                     <Link to={`/post/${post.slug}`} key={post.id} className="block group">
                         <div className="h-full p-6 border-2 border-neo-black dark:border-white bg-white dark:bg-[#161616] hover:bg-neo-yellow dark:hover:bg-neo-yellow transition-colors relative shadow-neo dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
                             <div className="flex justify-between items-start mb-4 font-mono text-xs text-gray-500 dark:text-gray-400 uppercase group-hover:text-neo-black">
-                                <span>{post.category}</span>
+                                <div className="flex items-center gap-2">
+                                    {post.pinned === 'true' && (
+                                        <Pin size={14} className="fill-neo-black dark:fill-white text-neo-black dark:text-white" />
+                                    )}
+                                    <span>{post.category}</span>
+                                </div>
                                 <span>{post.date}</span>
                             </div>
                             <h3 className="text-2xl font-serif font-bold mb-3 text-neo-black dark:text-neo-white group-hover:text-neo-black group-hover:underline decoration-2 underline-offset-4">

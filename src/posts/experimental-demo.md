@@ -3,7 +3,8 @@ title: "欢迎来到实验室：本站食用指南"
 date: "2025-12-17"
 category: "System / About"
 excerpt: "你好，流浪者。這里不是一个普通的博客，而是一个 Neo-Brutalist 风格的数字花园。请查收这份交互说明书，体验从贪吃蛇到暗黑模式的完整生态。"
-spotify: "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b?utm_source=generator"
+spotify: "https://open.spotify.com/track/0CbYTYjNq2nKUx1o4hGvBL?si=ceaf251c7edb41a0"
+pinned: "true"
 ---
 
 ## 0. 欢迎 (Welcome)

@@ -92,65 +92,98 @@
 /* Typography Overrides */
 @layer components {
   .prose {
-    @apply text-lg leading-loose font-medium;
+    @apply max-w-none font-serif text-[1.125rem] leading-[1.8] tracking-[0.01em];
     color: var(--color-prose-text) !important;
 
+    /* CJK Optimization */
+    word-break: break-word;
+    text-align: justify;
+
     p {
+      margin-top: 0;
       margin-bottom: 2em;
     }
 
     h1 {
-      @apply font-black text-5xl mt-0 mb-8 leading-tight;
+      @apply font-black text-4xl md:text-5xl mt-0 mb-10 leading-[1.1];
       color: var(--color-prose-heading) !important;
     }
 
     h2 {
-      @apply font-bold text-4xl mt-12 mb-6 leading-snug pb-4;
+      @apply font-black text-2xl md:text-3xl mt-16 mb-8 leading-[1.2] pb-2 inline-block;
       color: var(--color-prose-heading) !important;
-      border-bottom: 1px solid var(--color-prose-border);
+      border-bottom: 4px solid var(--color-neo-black);
+      width: fit-content;
+    }
+
+    .dark h2 {
+      border-bottom-color: var(--color-neo-white);
     }
 
     h3 {
-      @apply font-bold text-2xl mt-10 mb-4;
+      @apply font-bold text-xl md:text-2xl mt-12 mb-6 leading-tight;
       color: var(--color-prose-heading) !important;
     }
 
     strong {
       @apply font-black;
-      color: var(--color-prose-strong) !important;
+      color: var(--color-prose-heading) !important;
+    }
+
+    .dark strong {
+      color: var(--color-neo-white) !important;
     }
 
     ul {
-      @apply list-disc pl-6 mb-8;
+      @apply list-none pl-0 mb-10;
+    }
+
+    ul>li {
+      @apply relative pl-8 mb-4;
+    }
+
+    ul>li::before {
+      content: "///";
+      @apply absolute left-0 font-mono font-bold text-xs;
+      color: var(--color-prose-marker) !important;
+      top: 0.25em;
     }
 
     ol {
-      @apply list-decimal pl-6 mb-8;
+      @apply list-decimal pl-8 mb-10 font-mono text-sm;
     }
 
-    li {
-      @apply mb-2 pl-2;
-    }
-
-    li::marker {
-      @apply font-bold;
-      color: var(--color-prose-marker) !important;
+    ol>li {
+      @apply pl-4 mb-4 font-serif text-lg;
     }
 
     blockquote {
-      @apply italic pl-6 my-10 font-medium;
+      @apply italic px-8 py-6 my-12 border-2 border-neo-black dark:border-white bg-neo-yellow/5 dark:bg-white/5 font-medium relative;
       color: var(--color-prose-text) !important;
-      border-left: 4px solid var(--color-prose-strong);
+    }
+
+    blockquote::before {
+      content: "QUOTE_TRANSIT";
+      @apply absolute -top-4 -left-1 px-2 py-0.5 bg-neo-black text-white font-mono text-[10px] uppercase tracking-tighter;
+    }
+
+    .dark blockquote::before {
+      @apply bg-white text-black;
     }
 
     hr {
-      @apply my-12 border-t;
-      border-color: var(--color-prose-border) !important;
-      opacity: 1;
+      @apply my-16 border-0 h-1;
+      background-image: linear-gradient(to right, var(--color-prose-border) 50%, transparent 50%);
+      background-size: 10px 100%;
     }
 
     code {
+      @apply font-mono text-sm px-1.5 py-0.5 border border-neo-black/20 dark:border-white/20 bg-gray-50 dark:bg-white/5;
       color: var(--color-tempo-accent) !important;
+    }
+
+    pre code {
+      @apply border-0 p-0 bg-transparent;
     }
   }
 }

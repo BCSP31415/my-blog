@@ -3,7 +3,7 @@ title: "Nootropics 指北：基于神经药理学的认知增强方案"
 date: "2025-12-06"
 category: "Biohacking / 认知科学"
 excerpt: "这不是医疗建议，而是一份ADHD患者的系统重构日志。从长时程增强（LTP）到多巴胺驱动，深度解析基于神经药理学的认知干预协议。"
-spotify: "https://open.spotify.com/embed/track/4gMgiXfqyzZLMhsksGmbXR?utm_source=generator"
+spotify: "https://open.spotify.com/track/5NOyzcQJ6FzlaxDlP6iUWn?si=59ef1cfe488e41f6"
 ---
 
 ## 0. 序言：我的“系统重构”日志

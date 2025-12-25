@@ -136,7 +136,15 @@ const Post = () => {
                         <div className="mb-12 border-2 border-neo-black dark:border-white p-2 bg-white dark:bg-neo-black shadow-neo dark:shadow-none">
                             <iframe
                                 style={{ borderRadius: '0px' }}
-                                src={post.spotify}
+                                src={(() => {
+                                    const url = post.spotify;
+                                    if (url.includes('spotify.com/embed/')) return url;
+                                    const match = url.match(/spotify\.com\/(track|album|playlist)\/([a-zA-Z0-9]+)/);
+                                    if (match) {
+                                        return `https://open.spotify.com/embed/${match[1]}/${match[2]}?utm_source=generator`;
+                                    }
+                                    return url;
+                                })()}
                                 width="100%"
                                 height="152"
                                 frameBorder="0"

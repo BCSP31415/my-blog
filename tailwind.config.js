@@ -29,90 +29,12 @@ export default {
             typography: (theme) => ({
                 DEFAULT: {
                     css: {
-                        // Base text
-                        color: theme('colors.gray.700'),
-                        fontFamily: '"Playfair Display", "Songti SC", "Noto Serif SC", "STSong", "华文宋体", "SimSun", "宋体", serif',
-                        lineHeight: '1.8',
-                        fontSize: '1.125rem',
-
-                        // Paragraphs
-                        p: {
-                            marginTop: '0',
-                            marginBottom: '1.5em',
+                        maxWidth: 'none',
+                        color: 'inherit',
+                        a: {
+                            color: 'inherit',
+                            textDecoration: 'none',
                         },
-
-                        // Headers
-                        h1: {
-                            color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", "Songti SC", "Noto Serif SC", "STSong", "华文宋体", "SimSun", "宋体", serif',
-                            fontWeight: '900',
-                            fontSize: '3em',
-                            marginTop: '0',
-                            marginBottom: '0.5em',
-                            lineHeight: '1.1',
-                        },
-                        h2: {
-                            color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", "Songti SC", "Noto Serif SC", "STSong", "华文宋体", "SimSun", "宋体", serif',
-                            fontWeight: '800',
-                            fontSize: '2.25em',
-                            marginTop: '2em',
-                            marginBottom: '1em',
-                            lineHeight: '1.2',
-                            borderBottom: '2px solid #000', // Neo border
-                            paddingBottom: '0.2em',
-                        },
-                        h3: {
-                            color: theme('colors.black'),
-                            fontFamily: '"Playfair Display", "Songti SC", "Noto Serif SC", "STSong", "华文宋体", "SimSun", "宋体", serif',
-                            fontWeight: '700',
-                            fontSize: '1.75em',
-                            marginTop: '2em',
-                            marginBottom: '0.75em',
-                        },
-
-                        // Highlights
-                        strong: {
-                            color: theme('colors.black'),
-                            fontWeight: '700',
-                            backgroundColor: 'var(--color-neo-yellow)', // Highlight effect
-                            padding: '0 4px',
-                        },
-
-                        // Lists
-                        ul: {
-                            listStyleType: 'disc',
-                            paddingLeft: '1.5em',
-                            marginBottom: '2em',
-                        },
-                        'ul > li::marker': {
-                            color: theme('colors.black'),
-                        },
-
-                        // Quotes
-                        blockquote: {
-                            color: theme('colors.black'),
-                            borderLeftColor: theme('colors.black'),
-                            borderLeftWidth: '4px',
-                            fontFamily: '"Playfair Display", "Songti SC", "Noto Serif SC", "STSong", "华文宋体", "SimSun", "宋体", serif',
-                            fontStyle: 'italic',
-                            fontWeight: '500',
-                            fontSize: '1.5em', // Editorial quote size
-                            paddingLeft: '1em',
-                            marginTop: '2em',
-                            marginBottom: '2em',
-                        },
-
-                        // Code
-                        code: {
-                            fontFamily: '"Space Mono", monospace',
-                            backgroundColor: '#f1f5f9',
-                            padding: '2px 4px',
-                            borderRadius: '2px',
-                            fontWeight: '400',
-                        },
-                        'code::before': { content: '""' },
-                        'code::after': { content: '""' },
                     },
                 },
             }),
