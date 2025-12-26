@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ArrowLeft, Star } from 'lucide-react';
+import { ArrowLeft, Star, Printer } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -70,7 +70,7 @@ const Post = () => {
         <Layout>
             {/* Reading Progress Bar */}
             <motion.div
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--progress-start)] to-[var(--progress-end)] origin-left z-50"
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--progress-start)] to-[var(--progress-end)] origin-left z-50 print:hidden"
                 style={{ scaleX }}
             />
 
@@ -80,7 +80,7 @@ const Post = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
                 onClick={() => navigate('/')}
-                className="fixed top-20 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all"
+                className="fixed top-20 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all print:hidden"
                 aria-label="Back to home"
             >
                 <ArrowLeft className="w-5 h-5" />
@@ -92,7 +92,7 @@ const Post = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 onClick={() => toggleFavorite(post)}
-                className="fixed top-36 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all"
+                className="fixed top-36 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all print:hidden"
                 aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
             >
                 <Star
@@ -101,6 +101,19 @@ const Post = () => {
                         : 'text-gray-400'
                         }`}
                 />
+            </motion.button>
+
+            {/* Print Button */}
+            <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                onClick={() => window.print()}
+                className="fixed top-52 left-4 z-40 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 shadow-lg hover:bg-white/20 dark:hover:bg-black/20 transition-all print:hidden group"
+                aria-label="Print article"
+            >
+                <Printer className="w-5 h-5 text-gray-400 group-hover:text-neo-yellow transition-colors" />
+                <span className="absolute left-14 bg-neo-black text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-mono">PRINT_A4</span>
             </motion.button>
 
             <motion.article
@@ -216,7 +229,7 @@ const Post = () => {
                     </div>
 
                     {/* Comments Section */}
-                    <div className="border-t-4 border-neo-black dark:border-white pt-12 mt-12">
+                    <div className="border-t-4 border-neo-black dark:border-white pt-12 mt-12 print:hidden">
                         <h3 className="font-mono text-xl font-bold mb-8 uppercase text-neo-black dark:text-neo-white">/// User_Comments</h3>
                         <Comments postSlug={slug} />
                     </div>

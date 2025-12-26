@@ -218,3 +218,75 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Print Styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Hide digital-only UI */
+  /* Hide digital-only UI */
+  .fixed,
+  nav,
+  header,
+  footer,
+  .print-hidden,
+  .reading-progress-bar {
+    display: none !important;
+  }
+
+  /* Remove grid background */
+  body::before {
+    display: none !important;
+  }
+
+  /* Reset Brutalist styling for better ink usage */
+  .prose {
+    max-width: 100% !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    color: black !important;
+  }
+
+  .prose h1 {
+    font-size: 24pt !important;
+    margin-bottom: 15pt !important;
+  }
+
+  .prose h2 {
+    font-size: 18pt !important;
+    border-bottom: 2pt solid black !important;
+    display: block !important;
+    width: 100% !important;
+    margin-top: 25pt !important;
+    color: black !important;
+  }
+
+  /* Ensure containers translate well to paper */
+  .bg-white,
+  .dark\:bg-\[\#161616\] {
+    background: white !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide iframe (Spotify) */
+  iframe {
+    display: none !important;
+  }
+
+  /* Adjust image sizes for print */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    filter: none !important;
+  }
+}
